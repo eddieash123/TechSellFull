@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<app-header></app-header>
+<div *ngIf="cartItems.length > 0; else elseblock">
+    <body>
+        <div class="body">
+            <div class="items-container">
+                <h2>Your Cart</h2>
+                <div class="items" *ngFor="let products of cartItems">
+                        <div class="img-container">
+                            <img src={{products.product.img_url}} alt="img">
+                        </div>
+                        <div class="text">
+                            <p style="font-size: larger;"><b>{{products.product.name}}</b></p>
+                            <p>{{products.product.description}}</p>
+                            <b><p style="font-size: larger;">${{products.product.price}}</p></b>
+                            <p>Quantity: {{products.quantity}}</p>
+                        </div>
+                        <div class="remove-container">
+                            <button class="remove" (click)="removeFromCart(products.product.id)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                            </svg></button>
+                        </div>
+                </div>
+            </div>
+            <div class="order-sum">
+                <h3>Order Summary</h3>
+                <div class="prices">
+                    <div class="prices-text">
+                        <p style="font-size: larger;" id="p">Price: </p>
+                        <p style="font-size: larger;" id="p">Shipping: </p>
+                        <p style="font-size: larger;">Tax: </p>
+                    </div>
+                    <div class="prices-numbers">
+                        <p style="font-size: larger;" id="p">${{price}}</p>
+                        <p style="font-size: larger;" id="p">$15 </p>
+                        <p style="font-size: larger;">$20 </p>
+                    </div>
+                </div>
+                <div class="total" style="font-size: larger; font-weight: 600;"> 
+                    <div class="total-text">
+                        <p>Total:</p>
+                    </div>
+                    <div class="total-number">
+                        <p>${{price + 15 + 20}}</p>
+                    </div>
+                </div>
+                <button class="checkout-btn">Checkout</button>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </body> 
+</div>
+
+
+<ng-template #elseblock>
+    <div class="body2">
+        <h2>Your Cart</h2>
+        <p>There are no items in your cart!</p>
+        <a href="/products" (click)="productSearch('Products')">Click here to continue shopping</a>
+    </div><app-footer></app-footer>
+</ng-template>
+
+</html>
